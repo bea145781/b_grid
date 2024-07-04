@@ -26,7 +26,7 @@ let order_id = 1;
 const callbacks = {
   open: (client) => {
     logger.debug('Connected with Websocket server')
-    client.openOrders('BTCFDUSD')
+    client.klines('BTCFDUSD', '1m')
   },
   close: () => logger.debug('Disconnected with Websocket server'),
   message: data => logger.info(data)
