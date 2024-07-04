@@ -11,6 +11,7 @@ const apiSecret = process.env.API_SECRET
 const client = new Spot(apiKey, apiSecret, {
   baseURL: "https://api.binance.com",
 });
+const wsURL = 'wss://ws-api.binance.com/ws-api/v3' 
 
 const upper_price = 60000;
 const lower_price = 58000;
