@@ -22,26 +22,23 @@ let sell_order = [];
 
 let order_id = 1;
 
-// const callbacks = {
-//   open: (client) => {
-//     logger.debug('Connected with Websocket server')
-//     // get account info after connection established
-//     client.account({ recvWindow: 10000 })
-//   },
-//   close: () => logger.debug('Disconnected with Websocket server'),
-//   message: data => logger.info(data)
-// }
+const callbacks = {
+  open: (client) => {
+    logger.debug('Connected with Websocket server')
+    client.openOrders('BTCFDUSD')
+  },
+  close: () => logger.debug('Disconnected with Websocket server'),
+  message: data => logger.info(data)
+}
 
-// const websocketAPIClient = new WebsocketAPI(apiKey, apiSecret, { logger, callbacks })
-
-// // disconnect after 20 seconds
-// setTimeout(() => websocketAPIClient.disconnect(), 20000)
-
+const websocketAPIClient = new WebsocketAPI(apiKey, apiSecret, { logger, callbacks, wsURL })
+// disconnect after 20 seconds
+setTimeout(() => websocketAPIClient.disconnect(), 20000)
 
 
 
 async function main() {
-  const response = await client.klines("BTCUSDT", "1m", { limit: 1 });
+  const response = await client.klines("BTCFDUSD", "1m", { limit: 1 });
 
   const now_price = response.data[0][4];
   console.log("now_price", now_price);
@@ -159,10 +156,10 @@ async function make_orders(now_price) {
 
 }
 
-main().then(
-  () => process.exit(),
-  (err) => {
-    console.error(err);
-    process.exit(-1);
-  }
-);
+// main().then(
+//   () => process.exit(),
+//   (err) => {
+//     console.error(err);
+//     process.exit(-1);
+//   }
+// );
